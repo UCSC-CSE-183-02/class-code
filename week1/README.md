@@ -54,25 +54,8 @@ https://github.com/web2py/rocket3
 Non-python web server:
 https://www.nginx.com/
 
-# HTML
+HTML tutorial: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics 
 
-<a> href
-<img> src
-<div> style class id
+CSS tutorial: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics
 
-# CSS
-
-<div class="myclass" id="myid">
-  <div>
-    <a>link</a>
-  </div>
-<div>
-
-#myid {}
-.myclass {}
-div {}
-div.myclass {}
-div#myid {}
-div.myclass#myid {}
-div.myclass#myid div {}
-div.myclass#myid div a {}
+Bulma tutorial: https://www.freecodecamp.org/news/learn-bulma-in-5-minutes-ec5188c53e83/
