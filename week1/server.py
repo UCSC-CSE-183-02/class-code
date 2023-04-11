@@ -1,6 +1,7 @@
 import socket
 import os
 import sys
+import traceback
 
 def is_safe(filename):
     """make sure only serve files from inside the static folder"""
@@ -31,6 +32,14 @@ MIME_TYPES = {
     "mov": "movie/mpeg4",
 }
 
+def hello(request):
+    1/0
+    return f"hello you passed {request}"
+
+routes = {
+    "/hello": hello
+}
+
 def main(port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -43,10 +52,23 @@ def main(port):
         print(address)
         request = conn.recv(10000).decode()
         lines = request.split('\r\n')
-        a,filename,c = lines[0].split()
+        a,b,c = lines[0].split() # GET /index?q=hello HTTP/1.1
+        parts = b.split("?", 1)
+        filename = parts[0]
+        query_string = parts[1] if len(parts) > 1 else None
+
+        if filename in routes:
+            try:
+                output = routes[filename](query_string)
+            except:
+                output = f"<html><body><pre>{traceback.format_exc()}</pre></body></html>"
+            conn.send(response_ok(output.encode(), "text/html"))
+            conn.close()
+            continue
+
         if filename == '/':
             filename = "/index.html"
-        filename = "static" + filename    
+        filename = "static" + filename
         extension = filename.split(".")[-1]
         if not os.path.exists(filename) or not is_safe(filename): 
             conn.send(response_404())
