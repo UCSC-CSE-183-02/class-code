@@ -1,0 +1,19 @@
+[[extend 'layout.html']]
+
+<a href="[[=URL("main")]]" role="button">Back</a>
+
+<h2>[[=my_task.title]]</h2>
+<h3>Deadline: [[=my_task.deadline]], Status: [[=my_task.status]]</h3>
+<h3>Assigned to: [[=my_task.assignee.first_name]] [[=my_task.assignee.last_name]]</h3>
+<p>
+    [[=my_task.description]]
+</p>
+
+[[=form]]
+
+[[for comment in comments:]]
+<div style="border: 1px solid black; margin: 20px; padding: 10px">
+    <p>[[=comment.body]]</p>
+    <div>[[=comment.created_on]]</div>
+</div>
+[[pass]]

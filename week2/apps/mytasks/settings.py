@@ -26,7 +26,7 @@ STATIC_FOLDER = required_folder(APP_FOLDER, "static")
 UPLOAD_FOLDER = required_folder(APP_FOLDER, "uploads")
 
 # send verification email on registration
-VERIFY_EMAIL = True
+VERIFY_EMAIL = False
 
 # account requires to be approved ?
 REQUIRES_APPROVAL = False

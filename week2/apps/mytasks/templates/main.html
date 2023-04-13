@@ -1,0 +1,19 @@
+[[extend 'layout.html']]
+
+<h2>Existing tasks</h2>
+<table>
+[[for task in tasks:]]
+<tr>
+    <td>[[=task.id]]</td>
+    <td>[[=task.title]]</td>
+    <td>
+        <a href="[[=URL("details",task.id)]]"">Details</a>
+        <a href="[[=URL("edit",task.id)]]"">Edit</a>
+    </td>
+</tr>
+[[pass]]
+</table>
+
+<h2>Create a new task</h2>
+[[=form]]
+
