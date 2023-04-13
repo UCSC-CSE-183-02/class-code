@@ -1,0 +1,6 @@
+[
+  {"bird": "Mountain Chickadee", "weight": 11, "diet": "Insects", "habitat": "Forests"},
+  {"bird": "Bushtit", "weight": 5, "diet": "Insects", "habitat": "Scrub"},
+  {"bird": "California Towhee", "weight": 45, "diet": "Seeds", "habitat": "Scrub"},
+  {"bird": "Black Phoebe", "weight": 18, "diet": "Insects", "habitat": "Open Woodlands"}
+]
