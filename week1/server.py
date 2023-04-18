@@ -32,13 +32,14 @@ MIME_TYPES = {
     "mov": "movie/mpeg4",
 }
 
-def hello(request):
-    1/0
-    return f"hello you passed {request}"
+routes = {}
 
-routes = {
-    "/hello": hello
-}
+def action(url):
+    def wrapper(f):
+        routes[url] = f
+        return f
+    return wrapper
+   
 
 def main(port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -81,6 +82,15 @@ def main(port):
             else:
                 conn.send(response_ok(http_body, "text/html"))
         conn.close()
+
+
+@action("/index.html")
+def index(request):
+    return "hello world"
+
+@action("/test1.html")
+def index(request):
+    return "hello test1"
 
 if __name__ == "__main__":
     main(port=int(sys.argv[1]))
