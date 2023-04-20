@@ -1,0 +1,29 @@
+[[extend 'layout.html']]
+
+[[if form:]]
+<div class="section">
+  [[=form]]
+</div>
+[[else:]]
+Login to post
+[[pass]]
+
+<h3>Recent Posts</h3>
+<div class="section">
+  [[for row in rows:]]
+  <div style="border:1px solid red; padding:10px; margin:10px">
+    <h3>
+      [[if row.url:]]
+        <a href="[[=row.url]]">[[=row.title]]</a>
+      [[else:]]
+        [[=row.title]]
+      [[pass]]
+    </h3>
+    [[if row.body:]]
+    <p>[[=row.body]]</p>
+    [[pass]]
+    <a href="[[=URL('get_post', row.id)]]">Comments</a>
+    Created by [[=row.created_by.first_name]] on [[=row.created_on]]
+  </div>
+  [[pass]]
+</div>
