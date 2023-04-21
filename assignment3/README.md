@@ -27,7 +27,7 @@ When a user goes to the /index page, they should see a table for their own sight
 - `habitat`
 - `n_sightings`
 - a button to edit the entry (similarly to what done in the last video of Unit 8). 
-- a `+1` button to increment by 1 the sightings count.  The button should be a signed URL (similarly to what done in the last video of Unit 8 for deletion.)
+- a `+1` button to increment by 1 the sightings count. Optionally, the button could be a signed URL (similarly to what done in the last video of Unit 8 for deletion.)
 
 On top of the table, there should be a button [+] for adding a new entry.  Again, the last video of Unit 8 shows you essentially how to do all of this. 
 Thus, you will need the following controllers: 
