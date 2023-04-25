@@ -89,8 +89,34 @@ def index(request):
     return "hello world"
 
 @action("/test1.html")
-def index(request):
+def test1(request):
     return "hello test1"
+
+@action("/form_example.html")
+def form_example(request):
+    if request is not None:
+        d = dict(item.split("=") for item in request.split("&"))
+        print(d)
+    else:
+        d = None
+    return """<html><head></head><body>
+    <h1>Hello world<h1>
+        You submitted {d}
+        <form method="POST">
+          <input type="text" name="a"/>
+          <input type="datetime-local" name="b"/>
+          <textarea name="c"></textarea>
+          <select name="x">
+            <option>one</option>
+            <option>two</option>
+            <option>three</option>
+          </select>
+          <input type="submit" value="click me"/>
+        </form>
+
+    </body></html>
+    """.format(d=d)
+
 
 if __name__ == "__main__":
     main(port=int(sys.argv[1]))
