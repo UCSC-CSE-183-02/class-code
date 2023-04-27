@@ -3,3 +3,4 @@
 *.pyo
 #*
 *.log
+secrets.py

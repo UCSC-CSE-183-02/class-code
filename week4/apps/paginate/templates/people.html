@@ -1,0 +1,11 @@
+[[extend 'layout.html']]
+
+
+[[for person in rows:]]
+<div>
+[[=person.name]]
+</div>
+[[pass]]
+
+<a href="[[=URL('people', vars=dict(page=max(0,page-1)))]]">prev</a>
+<a href="[[=URL('people', vars=dict(page=page+1))]]">next</a>

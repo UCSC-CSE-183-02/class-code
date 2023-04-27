@@ -7,10 +7,15 @@
 
 # what do frameworks do (server side)
 
-- handle concurrenty
+- handle concurrency
 - can interface with other web servers (cherrypy, rocket3, twisted, gunicorn, ...) WSGI
 - routing: it can map URLs into function calls
 - parse request: pass the request to the functions
+  - from py4web import request
+    - request.GET
+    - request.POST
+    - request.json
+    - request.method
 - cache: store pages or partial data for reuse and speed
 - session: store information associated to each client
 - cookies: set cookies and retrieve cookies

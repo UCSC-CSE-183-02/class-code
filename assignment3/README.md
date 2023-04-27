@@ -1,5 +1,11 @@
 # Homework 3: Log Bird Sightings
 
+Upload it here:
+
+https://peer.crowdgrader.com/crowdgrader/venues/view_venue/5445
+
+and in github: assignment3/apps/birds/...
+
 In this assignment, you will create an app that enables you to log sightings of birds. 
 
 You should create a table with the following fields: 
@@ -38,11 +44,13 @@ Thus, you will need the following controllers:
 - `inc/<id>` : to increment the count of an entry. 
 
 You should use the starting code homework3_starter. 
-The /inc action, as mentioned, should be implemented as a signed URL.  In practice you will define the controller like (see the delete controller in Unit 8): 
+The /inc action, as mentioned, should prevent a user from incrementing the count of a sighting by another user. This can implemented as a signed URL or an explicit check. In practice you will define the controller like (see the delete controller in Unit 8): 
 
     @action('/inc/<bird_id:int>')
     @action.uses(db, auth)
     def inc(bird_id):
+       bird = db.bird[birg_id]
+       if bird.user_email != get_user_email(): raise HTTP(400)
        ...
 
-The `edit` action should check that only the user to whom the row belongs (the user whose email is in the row) can edit it.  You can achieve this by either signing the `edit` URL, or by checking in the edit controller that the user who is logged in is the user to whom the row belongs. Your choice.
+Similarly, the `edit` action should check that only the user to whom the row belongs (the user whose email is in the row) can edit it.  You can achieve this by either signing the `edit` URL, or by checking in the edit controller that the user who is logged in is the user to whom the row belongs. Your choice.

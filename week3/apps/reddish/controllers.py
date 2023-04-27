@@ -21,21 +21,3 @@ def get_post(post_id):
     # details about the post_id and comments about post_id
     return locals()
 
-# example of a form
-
-@action("myform", method=["GET", "POST"])
-@action.uses("generic.html", auth)
-def myform():
-    form = Form([
-        Field('name'),
-        Field('description', 'text'),
-    ])
-    if form.accepted:
-        print(form.vars)
-        redirect(URL("index"))
-    elif form.errors:
-        print(form.errors)
-    else:
-        print("i made a new form")
-    return locals()
-
