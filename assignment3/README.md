@@ -39,8 +39,8 @@ On top of the table, there should be a button [+] for adding a new entry.  Again
 Thus, you will need the following controllers: 
 
 - `index` : to display the table
-- `add` : to add a new entry. 
-- `edit<id>` : to edit an entry.  Check that the entry belongs to the user editing it!  Do not let a user edit entries belonging to other users! 
+- `add` : to add a new entry.
+- `edit<id>` : to edit and entry.  Check that the entry belongs to the user editing it!  Do not let a user edit entries belonging to other users! 
 - `inc/<id>` : to increment the count of an entry. 
 
 You should use the starting code homework3_starter. 
