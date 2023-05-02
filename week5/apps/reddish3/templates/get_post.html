@@ -1,0 +1,28 @@
+[[extend 'layout.html']]
+
+<h2>
+    [[if row.url:]]
+      <a href="[[=row.url]]">[[=row.title]]</a>
+    [[else:]]
+      [[=row.title]]
+    [[pass]]
+  </h2>
+[[if row.body:]]
+<p>[[=row.body]]</p>
+[[pass]]
+Created by [[=row.created_by.first_name]] on [[=row.created_on]]
+
+<h4>Your comment</h4>
+[[if form:]]
+<div class="section">
+  [[=form]]
+</div>
+[[pass]]
+
+<h4>Previous comment</h4>
+[[for comment in comments:]]
+<div>
+    <p>[[=comment.body]]</p>
+    Commented by [[=comment.created_by.first_name]] on [[=comment.created_on]]
+</div>
+[[pass]]

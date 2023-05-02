@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <style>
+            #ball { width: 30px; height: 30px; background: red; border-radius: 100px; left: 0; bottom: 0; position: fixed}
+        </style>
+    </head>
+    <body>
+        <div id="ball" onclick="alert('you clicked')"></div>
+        <script>
+var x=0, y=0;
+var vx=10; vy=20;
+var ball = document.getElementById("ball")
+var dt = 0.1;
+function update() {
+    vy = vy - 1*dt;
+    x = x + vx * dt;
+    y = y + vy * dt;
+    if (y<0) vy = -vy;
+    ball.style.left = x;
+    ball.style.bottom = y;    
+
+};
+setInterval(update, 10);
+        </script>
+    </body>
+</html>

@@ -32,12 +32,9 @@ def edit_post(post_id):
     # details about the post_id and comments about post_id
     return locals()
 
-@action("manage/<path:path>", method=["GET", "POST"])
+@action("manage/<tname>/<path:path>", method=["GET", "POST"])
 @action.uses("manage.html", auth.user)
-def manage(path):
-    search_queries = [
-        ["text", lambda value: db.post.body.contains(value)],
-    ]    
+def manage(tname, path):
     # details about the post_id and comments about post_id
-    grid = Grid(path, db.post, search_queries=search_queries)
+    grid = Grid(path, db[tname])
     return locals()

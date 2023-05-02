@@ -1,0 +1,34 @@
+[[extend 'layout.html']]
+
+[[if form:]]
+<div class="section">
+  [[=form]]
+</div>
+[[else:]]
+<a class="button" href="[[=URL('auth/login')]]">Login to post</a>
+[[pass]]
+
+<h3>Recent Posts</h3>
+<div class="section">
+  [[for row in rows:]]
+  <div class="box">
+    <h4 id="const" class="title is-3">const</h4>
+    <article class="message is-primary">
+      <span class="icon has-text-primary">
+      <i class="fab fa-js"></i>
+      </span>
+      <div class="message-body">
+        [[if row.url:]]
+        <a href="[[=row.url]]">[[=row.title]]</a>
+      [[else:]]
+        [[=row.title]]
+      [[pass]]
+        </div>
+    </article>
+    <div>
+      [[=row.body]]
+    </div>
+    <a href="[[=URL('get_post', row.id)]]">Comments</a>
+    Created by [[=row.created_by.first_name]] on [[=row.created_on]]
+</div>
+[[pass]]
