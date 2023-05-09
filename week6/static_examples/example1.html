@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <style>
+            #ball {
+                width: 30px; height: 30px; background: red; 
+                border-radius: 100px; 
+                left: 10px; bottom: 10px; 
+                position: fixed}
+            .green { color: green}
+            .red { color: red}
+        </style>
+    </head>
+    <body>        
+        <div id="v">
+            <input v-model="message"/>
+            <div v-for="i in n" v-bind:class="{'green':i % 2 ==0, 'red':i % 2 ==1}">
+                {{message}} {{i}}
+            </div>
+            <div id="ball"></div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+"use strict";
+
+var app = new Vue({ el: '#v', data: { message: 'Hello Vue!', n: [1,2,3] }});
+
+/*
+var x=0, y=0;
+var vx=10; vy=20;
+var ball = document.getElementById("ball")
+var dt = 0.1;
+function update() {
+    vy = vy - 1*dt;
+    x = x + vx * dt;
+    y = y + vy * dt;
+    if (y<0) vy = -vy;
+    ball.style.left = x;
+    ball.style.bottom = y;    
+};
+setInterval(update, 10);
+*/
+        </script>
+    </body>
+</html>

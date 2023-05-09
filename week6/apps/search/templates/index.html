@@ -1,0 +1,47 @@
+[[extend 'layout.html']]
+
+        <div id="test">
+            <h4>Search for options</h4>
+            <input v-model="text" v-on:keyup="filter_countries"/>
+            <ul v-if="text.length>0">
+                <li v-for="item in results" v-on:click="add(item)">
+                    {{item.name}}
+                </li>
+            </ul>
+            <h4>Selected Items</h4>
+            <ul>
+                <li v-for="item in selected">
+                    {{item.name}} [<span v-on:click="remove(item)">🗑</span>]
+                </li>
+            </ul>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+"use strict";
+
+var countries = [];
+
+function init() {
+    var self = {};
+    self.data = { countries: countries, text: "", results: [], selected: [] };    
+    self.methods = {};
+    self.methods.filter_countries = function() {
+      if(self.vue.text.length>1) {
+        fetch("/search/countries?text="+encodeURIComponent(self.vue.text))
+        .then(r=>r.json())
+        .then(function(data){
+          self.vue.results = data.countries;
+        });
+      }
+    };
+    self.methods.add = function(item) {
+        self.vue.selected.push(item);
+    }
+    self.methods.remove = function(item) {
+        self.vue.selected = self.vue.selected.filter(function(other) { return other.name != item.name; } );
+    }
+    self.vue = new Vue({ el: '#test', data: self.data, methods: self.methods});
+    return self;
+}
+var app = init();
+        </script>

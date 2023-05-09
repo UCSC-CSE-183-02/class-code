@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <style>
+            .ball {
+                width: 3px; height: 3px; background: red; 
+                border-radius: 100px; 
+                position: fixed}
+            .green { color: green}
+            .red { color: red}
+            .fillscreen {
+                width: 100vw;
+                height: 100vh;
+                background-color: black;
+            }
+        </style>
+    </head>
+    <body>        
+        <div id="v">
+            <div class="fillscreen" v-on:click="clicked()">
+                <div v-for="item in items" class="ball" v-bind:style="{left: item.x, bottom: item.y}"></div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+"use strict";
+
+function init() {
+    var self = {};
+    self.data = {};    
+    self.methods = {};
+
+    self.update = function() {
+        for(var k=0; k<self.vue.items.length; k++) {
+            var item = self.vue.items[k];
+            var dt = 0.1;
+            item.vy = item.vy - 1*dt;
+            item.x = item.x + item.vx * dt;
+            item.y = item.y + item.vy * dt;
+            if (item.y < 0) item.vy = -item.vy;
+            if (item.x < 0) item.vx = -item.vx;
+            if (item.x > window.innerWidth) item.vx = -item.vx;
+        }
+    };
+
+    self.data.items = [];
+    for(var k=0; k<1000; k++) {
+        self.data.items.push({x: 500*Math.random(), y: 500*Math.random(), vx: 10*Math.random(), vy: 10*Math.random()});
+    }
+
+    self.methods.clicked = function() {
+        self.vue.items.push({x: 10, y: 200, vx: 10, vy: 10})
+    };
+
+    self.vue = new Vue({ el: '#v', data: self.data, methods: self.methods});
+
+    setInterval(self.update, 10);
+
+    return self;
+}
+
+var app = init();
+
+        </script>
+    </body>
+</html>
