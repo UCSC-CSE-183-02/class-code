@@ -1,0 +1,58 @@
+[[extend 'layout.html']]
+
+<style>
+[v-cloak] {
+     display: none;
+}
+</style>
+
+
+<div class="section" id="vue-target" v-cloak>
+  <!-- Put here your Vue.js template -->
+
+  <div class="columns">
+    <div class="column">
+      Feed. 
+    </div>
+
+    <div class="column is-one-third has-background-light">
+      
+      <div class="field">
+        <p class="control has-icons-right">
+          <input class="input" type="text" placeholder="Search users">
+          <span class="icon is-small is-right clickable">
+            <i class="fa fa-times-circle"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field has-addons">
+        <p class="control">
+          <button class="button">
+            <span>username</span>
+          </button>
+        </p>
+        <p class="control">
+          <button class="button is-success is-outlined">
+            <span class="icon is-small">
+              <i class="fa fa-check "></i>
+            </span>
+            <span>Follow/Unfollow</span>
+          </button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+[[block page_scripts]]
+<!-- Loads the index-specific js for Vue -->
+<script>
+  let get_users_url = "[[=XML(get_users_url)]]";
+  let follow_url = "[[=XML(follow_url)]]";
+</script>
+<script src="js/index.js"></script>
+[[end]]
