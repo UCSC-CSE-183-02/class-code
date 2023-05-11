@@ -19,8 +19,10 @@
   </div>
   <h4>list of tasks</h4>
   <div>
-    <input placeholder="search your tasks">
-    <div class="task" v-for="task in my_tasks">
+    <input placeholder="search your tasks" v-model="search">
+    <div class="task" 
+         v-for="task in my_tasks" 
+         v-if="search.length==0 || task.body.toLowerCase().indexOf(search.toLowerCase())>=0">
         <div>{{task.body}}</div>       
         <div>
             created on {{task.created_on.replace("T", " ").slice(0,16)}}

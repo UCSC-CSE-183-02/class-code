@@ -23,6 +23,7 @@ function init() {
     self.data.statuses = ["pending", "completed", "rejected"];
     self.data.new_task = clone(empty_task);
     self.data.my_tasks = [];
+    self.data.search = "";
 
     // client side methods
     self.methods.add_task = function() {
