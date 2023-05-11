@@ -1,0 +1,44 @@
+[[extend 'layout.html']]
+
+<div id="vue">
+  <h4>Form to create new tasks</h4>
+  <div>
+    <textarea v-model="new_task.body"></textarea>
+    Assign to:
+    <select v-model="new_task.assigned_to">
+        <option v-for="user in users" v-bind:value="user.id">{{user.first_name}} {{user.last_name}}</option>
+    </select>
+    Task status:
+    <select v-model="new_task.status">
+        <option v-for="status in statuses">{{status}}</option>
+    </select>
+    Deadline:
+    <input type="datetime-local" v-model="new_task.deadline"/>
+
+    <button v-on:click="add_task()">Add task</button>
+  </div>
+  <h4>list of tasks</h4>
+  <div>
+    <input placeholder="search your tasks">
+    <div class="task" v-for="task in my_tasks">
+        <div>{{task.body}}</div>       
+        <div>
+            created on {{task.created_on.replace("T", " ").slice(0,16)}}
+            created by {{users_as_dict[task.created_by]}}
+            assigned to {{users_as_dict[task.assigned_to]}}
+        </div>
+        <div style="align:right">
+            {{task.status}}
+            <button v-bind:disabled="task.status=='completed'" v-on:click="set_completed(task)">Completed</button>
+            <button v-bind:disabled="task.status=='rejected'" v-on:click="set_rejected(task)">Rejected</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+[[block page_scripts]]
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script src="js/main.js"></script>
+[[end]]
