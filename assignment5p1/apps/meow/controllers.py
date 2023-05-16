@@ -34,20 +34,14 @@ from .common import db, session, T, cache, auth, logger, authenticated, unauthen
 from py4web.utils.url_signer import URLSigner
 from .models import get_username
 
-url_signer = URLSigner(session)
-
 # Some constants.
 MAX_RETURNED_USERS = 20 # Our searches do not return more than 20 users.
 MAX_RESULTS = 20 # Maximum number of returned meows. 
 
 @action('index')
-@action.uses('index.html', db, auth.user, url_signer)
+@action.uses('index.html', db, auth.user)
 def index():
-    return dict(
-        # COMPLETE: return here any signed URLs you need.
-        get_users_url = URL('get_users', signer=url_signer),
-        follow_url=URL('set_follow', signer=url_signer),
-    )
+    return dict()
 
 @action("get_users")
 @action.uses(db, auth.user)
@@ -57,7 +51,7 @@ def get_users():
 
 
 @action("set_follow", method="POST")
-@action.uses(db, auth.user, url_signer.verify())
+@action.uses(db, auth.user)
 def set_follow():
     # Implement. 
     return "ok"
