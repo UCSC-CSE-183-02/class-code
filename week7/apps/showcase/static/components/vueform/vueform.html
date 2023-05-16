@@ -1,0 +1,65 @@
+<div class="vueform">
+    <div v-for="field in fields" class="field">
+      <label for="field.name" class="label">{{field.label}}:</label>
+      <div class="field" v-on:input="mark_field(field._idx)"
+           v-on:focusout="validate_field(field._idx)" v-on:mouseout="validate_field(field._idx)">
+        <!-- Datetime -->
+        <div class="datetime" v-if="field.type==='datetime'">
+          <input v-if="field.readonly" type="text" readonly class="input is-static" v-model="field.datetime_readonly">
+          <div v-else class="columns is-mobile">
+            <div class="column">
+              <input class="input column "
+                     type="date" v-model="field.date" @change="set_readable_date(field._idx)">
+              <span class="has-text-grey is-size-7">{{field.date_readonly}}</span>
+            </div>
+            <div class="column">
+              <input class="input column"
+                     type="text" v-model="field.time" @change="set_readable_date(field._idx)">
+              <span class="has-text-grey is-size-7">Timezone: {{time_zone}}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Date  -->
+        <div class="date" v-else-if="field.type==='date'">
+          <input v-if="field.readonly" type="text" readonly class="input is-static" v-model="field.date_readonly">
+          <input v-else class="input"
+                 :type="field.type" :placeholder="field.placeholder"
+                 v-model="field.value" :readonly="field.readonly"
+                 :class="{'is-static': field.readonly}">
+        </div>
+        <!-- Dropdown -->
+        <input v-else-if="field.type=='dropdown' && field.readonly" type="text"
+               readonly class="input is-static" v-model="field.text">
+        <div class="select" v-else-if="field.type=='dropdown'" :class="field.multiple? 'is-multiple' : ''">
+          <select v-model="field.value" :multiple="field.multiple">
+            <option v-for="setel in field.values" v-bind:value="setel.label">{{setel.text}}</option>
+          </select>
+        </div>
+        <!-- Textarea -->
+        <textarea v-else-if="field.type==='textarea'" class="textarea" v-model="field.value"
+                  :placeholder="field.placeholder"
+                  :readonly="field.readonly"></textarea>
+        <!-- Checkbox -->
+        <p v-else-if="field.type==='checkbox' && field.readonly">
+          <span v-if="field.value===true">Yes</span>
+          <span v-else-if="field.value===false">No</span>
+          <span v-else>None</span>
+        </p>
+        <input v-else-if="field.type==='checkbox'" type="checkbox" :disabled="field.readonly"
+               v-model="field.value">
+        <!-- Normal field -->
+        <input v-else class="input"
+               :type="field.type" :placeholder="field.placeholder"
+               v-model="field.value" :readonly="field.readonly"
+               :class="{'is-static': field.readonly}">
+        <p v-if="field.error" class="error">{{field.error}}</p>
+        <p v-if="field.comment" class="comment">{{field.comment}}</p>
+      </div>
+    </div>
+  </table>
+  <div v-if="!readonly" class="submission">
+    <p class="error" v-if="some_error">Please fix the above errors</p>
+    <button v-on:click="submit" class="button is-primary" :disabled="some_error">Save</button>
+    <button v-if="cancel_url_" v-on:click="cancel" class="button">Cancel</button>
+  </div>
+</div>

@@ -41,17 +41,18 @@ MAX_RESULTS = 20 # Maximum number of returned meows.
 @action('index')
 @action.uses('index.html', db, auth.user)
 def index():
+    # lists all posts filtered by followed
     return dict()
 
 @action("get_users")
 @action.uses(db, auth.user)
 def get_users():
-    # Implement. 
+    # Implement. Lists all the users 
     return dict()
 
 
 @action("set_follow", method="POST")
 @action.uses(db, auth.user)
 def set_follow():
-    # Implement. 
+    # Implement.
     return "ok"

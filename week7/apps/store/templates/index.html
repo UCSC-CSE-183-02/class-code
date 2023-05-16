@@ -1,0 +1,34 @@
+[[extend 'layout.html']]
+
+<div id="vue">
+  <h4>Products for sale</h4>
+  <div class="columns">
+    <div class="c75">
+      <div v-for="product in products">
+        <h5>{{product.name}}</h5>
+        <img v-if="product.picture" v-bind:src="'../download/' + product.picture"/>
+        <p>{{product.description}}</p>
+        <span>${{product.unit_price.toFixed(2)}}</span>
+        <button v-on:click="add_to_cart(product)">Add Shopping Cart</button>
+      </div>
+    </div>
+    <div class="c25">
+      <h4>Your Cart</h4>
+      <div v-for="item in cart">
+        <h5>{{item.name}}</h5>
+        <span>${{item.quantity}} x </span>
+        <span>${{item.unit_price.toFixed(2)}}</span>
+      </div>
+      <button v-if="user.id" v-on:click="buy_cart()">Buy Cart</button>
+    </div>
+  </div>
+</div>
+
+[[block page_scripts]]
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script>
+  window.user = JSON.parse('[[=XML(   json.dumps(user)   )]]');
+</script>
+<script src="js/index.js"></script>
+[[end]]
