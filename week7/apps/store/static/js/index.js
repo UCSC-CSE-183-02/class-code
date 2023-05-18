@@ -27,9 +27,20 @@ function init() {
         self.vue.cart = {};
     };
     self.vue = new Vue({el:"#vue", data: self.data, methods: self.methods});
-    axios.get("../api/products").then(function(response){
-        self.vue.products = response.data.products;
-    })
+        function load_data() {
+        axios.get("../api/products").then(function(response){
+            self.vue.products = response.data.products;
+        });
+        /*
+        fetch(("../api/products").then(r=>r.json()).then(function(response){
+            self.vue.products = response.products;
+        });
+        */
+    }
+    /*
+    load_data();
+    setInterval(load_data, 3000);
+    */
     return self;
 }
 
