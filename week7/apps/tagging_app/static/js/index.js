@@ -36,10 +36,8 @@ function init() {
             "features": features
         };
         self.vue.new_thing.name = "";
-        self.vue.new_thing.features = "[]";
-        /*
-            exercise: how do we clean the tags
-        */
+        self.vue.new_thing.features = "[]"; // the tags_input plugin stores json as a string
+        Q(".tags-list")[0].innerHTML = ""; // magic to clear the non vue.js tags
         self.vue.things.unshift(data);
         axios.post("../api/create_thing", data).then(function(){}, function(){
             self.vue.things.shift();
@@ -50,7 +48,7 @@ function init() {
     console.log("test!");
     self.methods.do_search();
 
-    Q.tags_input("#features");
+    Q.tags_input("#features"); // magic to turn the input into tags
 
     return self;
 }
