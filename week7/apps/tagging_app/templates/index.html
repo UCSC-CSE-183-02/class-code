@@ -1,7 +1,28 @@
 [[extend 'layout.html']]
 
-<div class="section">
-  <div class="vars">
-      [[=message]]
+<div id="vue" style="padding: 40px">
+  <h4 class="subtitle">Make a New Thing!</h4>
+  <div>
+      <input list="mynames" class="control" v-model="new_thing.name"/>
+      <input id="features" class="control" v-model="new_thing.features"/>
+      <button class="button" v-on:click="post_new_thing()">Create</button>
+
+      <datalist id="mynames">
+        <option v-for="option in options">{{option}}</option>
+      </datalist>
+  </div>
+  <h4 class="subtitle">Search Things</h4>
+  <input v-model="search" v-on:keyup="do_search()"/>
+  <div v-for="thing in things" class="box">
+    <div>{{thing.name}}</div>
+    <div class="tags">
+      <span v-for="feature in thing.features" class="tag is-info">{{feature}}</span>
+    </div>
   </div>
 </div>
+
+[[block page_scripts]]
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="js/index.js"></script>
+[[end]]

@@ -25,17 +25,17 @@ def api_products():
     products = db(db.product).select().as_list()
     return dict(products=products)
 
-#@action("api/make_order", method="POST")
-#@action.uses(auth)
-#def api_make_order():
-#    data = request.json
-#    product_id=data.get("product_id")
-#    quantity=data.get("quantity")
-#    product = db.product[product_id]
-#    db.order_item.insert(product_id=product_id,
-#                         quantity=quantity,
-#                         unit_price=product.unit_price)
-#    return dict()
+# @action("api/order_one_product", method="POST")
+# @action.uses(auth)
+# def api_order_one_product():
+#     data = request.json
+#     product_id=data.get("product_id")
+#     quantity=data.get("quantity")
+#     product = db.product[product_id]
+#     db.order_item.insert(product_id=product_id,
+#                          quantity=quantity,
+#                          unit_price=product.unit_price)
+#     return dict()
 
 
 @action("api/buy_cart", method="POST")
