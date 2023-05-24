@@ -15,8 +15,9 @@ function init() {
     self.methods = {};
     self.data.new_thing = {
         "name": "",
-        "features": "[]"
+        "features": []
     };
+    self.data.new_tag = "";
     self.data.things = [];
     self.data.search = [];
     self.data.options = ["Apple", "Banana", "Strawberry"];
@@ -30,25 +31,29 @@ function init() {
         });
     }, 1000);
     self.methods.post_new_thing = function() {
-        var features = Q.eval(self.vue.new_thing.features);
         var data = {
             "name": self.vue.new_thing.name,
-            "features": features
+            "features": self.vue.new_thing.features
         };
         self.vue.new_thing.name = "";
-        self.vue.new_thing.features = "[]"; // the tags_input plugin stores json as a string
-        Q(".tags-list")[0].innerHTML = ""; // magic to clear the non vue.js tags
+        self.vue.new_thing.features = [];
+        self.vue.new_tag = "";
         self.vue.things.unshift(data);
         axios.post("../api/create_thing", data).then(function(){}, function(){
             self.vue.things.shift();
             alert("Sorry unable to record it!");            
         });
     }
+    self.methods.add_tag = function() {
+        self.vue.new_thing.features.push(self.vue.new_tag);
+        self.vue.new_tag = "";
+    };
+    self.methods.del_tag = function(tag) {
+        self.vue.new_thing.features = self.vue.new_thing.features.filter(t=>{return t!=tag;})
+    };
     self.vue = new Vue({el:"#vue", "data": self.data, "methods": self.methods});
     console.log("test!");
     self.methods.do_search();
-
-    Q.tags_input("#features"); // magic to turn the input into tags
 
     return self;
 }

@@ -3,13 +3,33 @@
 <div id="vue" style="padding: 40px">
   <h4 class="subtitle">Make a New Thing!</h4>
   <div>
-      <input list="mynames" class="control" v-model="new_thing.name"/>
-      <input id="features" class="control" v-model="new_thing.features"/>
-      <button class="button" v-on:click="post_new_thing()">Create</button>
-
-      <datalist id="mynames">
-        <option v-for="option in options">{{option}}</option>
-      </datalist>
+    <div class="field">
+      <div class="control">
+        <input list="mynames" class="control" v-model="new_thing.name"/>
+      </div>
+    </div>
+    <div class="field is-grouped is-grouped-multiline">
+      <div class="control">
+        <input id="features" class="control" v-model="new_tag"/>
+        <span class="tag is-info" v-on:click="add_tag()">add</span>
+      </div>
+    </div>
+    <div class="field is-grouped is-grouped-multiline">
+      <div class="control" v-for="tag in new_thing.features">
+        <div class="tags has-addons">
+          <span class="tag is-info">{{tag}}</span>
+          <a class="tag is-delete" v-on:click="del_tag(tag)"></a>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button" v-on:click="post_new_thing()">Create</button>
+      </div>
+    </div>
+    <datalist id="mynames">
+      <option v-for="option in options">{{option}}</option>
+    </datalist>
   </div>
   <h4 class="subtitle">Search Things</h4>
   <input v-model="search" v-on:keyup="do_search()"/>
