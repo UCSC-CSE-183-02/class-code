@@ -1,0 +1,36 @@
+[[extend 'layout.html']]
+
+<!-- https://fullcalendar.io/docs/v1/usage -->
+<div id='calendar'></div>
+
+[[block page_scripts]]
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    window.calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      eventClick: function(info) {
+        alert('Event: ' + info.event.title);
+        // change the border color just for fun
+        info.el.style.borderColor = 'red';
+      }
+    });
+    window.calendar.render();
+    window.calendar.addEvent({
+      id: 'a',
+      title: 'my event',
+      start: '2023-05-10'
+    });
+
+  });
+
+</script>
+[[end]]
+
+
+
+
+
+

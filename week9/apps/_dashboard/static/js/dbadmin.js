@@ -1,0 +1,10 @@
+var app = {data: {}, methods:{}};
+app.params = new URLSearchParams(window.location.search);
+app.data.loading = 0;
+app.data.app = app.params.get('app');
+app.data.dbname = app.params.get('dbname');
+app.data.tablename = app.params.get('tablename');
+app.data.url = '../rest/{app}/{dbname}/{tablename}'.format(app.data);
+app.data.filter = app.params.get('filter') || '';
+app.data.order = app.params.get('order') || '';
+app.vue = new Vue({el:"#vue", data: app.data, methods: app.methods});
