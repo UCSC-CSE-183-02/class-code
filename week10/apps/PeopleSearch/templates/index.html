@@ -1,0 +1,18 @@
+[[extend 'layout.html']]
+
+<div id="vue">
+  <input v-model="search_string"/>
+  <table>
+    <tr v-for="user in users" v-if="search(search_string, user)">
+      <td>{{user.id}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+    </tr>
+  </table>
+</div>
+
+[[block page_scripts]]
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="js/index.js"></script>
+[[end]]
+
