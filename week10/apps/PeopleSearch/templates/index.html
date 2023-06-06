@@ -1,9 +1,9 @@
 [[extend 'layout.html']]
 
 <div id="vue">
-  <input v-model="search_string"/>
+  <input v-model="search_string" v-on:keyup="filter_users()"/>
   <table>
-    <tr v-for="user in users" v-if="search(search_string, user)">
+    <tr v-for="user in filtered_users">
       <td>{{user.id}}</td>
       <td>{{user.first_name}}</td>
       <td>{{user.last_name}}</td>
