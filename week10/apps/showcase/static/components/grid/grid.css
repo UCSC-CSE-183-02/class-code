@@ -1,0 +1,28 @@
+.pagination .grid_page_number {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+span.disabled {
+    color: lightgray;
+}
+th.clickable {
+    cursor: pointer;
+}
+.pagination {
+    direction: rtl;
+}
+.pagination-symbols {
+    direction: ltr;
+}
+
+input.search {
+    width: 100%;
+}
+
+.table.is-striped tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.table.is-striped tr:hover {
+    background-color: #faf7f0;
+}

@@ -1,0 +1,12 @@
+[[extend 'layout.html']]
+
+<div id="vue">
+  <div class="section">
+    <fileviewer :myfiles="files"></fileviewer>
+  </div>
+</div>
+
+[[block page_scripts]]
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="js/fileviewer.js"></script>
+[[end]]
